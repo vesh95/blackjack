@@ -31,14 +31,14 @@ class Player
     score
   end
 
-  def take_money(value = 0)
+  def give_money(value = 0)
     return unless value <= @bank
 
     @bank -= value
     value
   end
 
-  def get_money(value = 0)
+  def take_money(value = 0)
     @bank += value
   end
 end
