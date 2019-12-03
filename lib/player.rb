@@ -41,4 +41,8 @@ class Player
   def take_money(value = 0)
     @bank += value
   end
+
+  def cards_count
+    @hand.cards.count
+  end
 end
