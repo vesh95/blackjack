@@ -27,6 +27,10 @@ class Player
     @hand.show
   end
 
+  def shadow_score
+    score
+  end
+
   def take_money(value = 0)
     return unless value <= @bank
 

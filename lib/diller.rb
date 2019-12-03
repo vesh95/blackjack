@@ -3,6 +3,10 @@
 require_relative 'player'
 class Diller < Player
   def shadow_cards
-    @hand.cards.size.times { puts('|* |') }
+    '|* |' * @hand.cards.size
+  end
+
+  def shadow_score
+    'xx'
   end
 end
