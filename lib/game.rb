@@ -43,4 +43,19 @@ class Game
     @deck = Deck.new
     @deck.shuffle!
   end
+
+  private
+
+  def player_step(player)
+    actions_list(player) if player.class == User
+    case player.make_a_decision
+    when :pass
+      nil
+    when :add
+      player.get_card(@deck.pop!)
+      nil
+    when :open
+      @open = true
+    end
+  end
 end

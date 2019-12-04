@@ -11,7 +11,10 @@ class Diller < Player
   end
 
   def make_a_decision
-    :pass if score <= 17
-    :pass if score >= 17
+    if score <= 17 && cards_count <= 3
+      :add
+    else
+      :pass
+    end
   end
 end
