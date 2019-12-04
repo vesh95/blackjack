@@ -1,4 +1,7 @@
 AllCops:
-  Enabled: true
+  Include:
+    - 'lib/*/*'
+    - 'lib/**'
+    - '*'
 Style/Documentation:
   Enabled: false
