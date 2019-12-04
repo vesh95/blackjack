@@ -37,4 +37,12 @@ class Game
     puts('o - открыть карты')
   end
 
+  def show_winner(player)
+    puts("Победил #{player.name}")
+  end
+
+  def resume
+    puts("Банк #{@bank}")
+    @players.each { |player| puts("#{player.name} $#{player.bank}") }
+  end
 end

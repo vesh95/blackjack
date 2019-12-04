@@ -44,6 +44,18 @@ class Game
     @deck.shuffle!
   end
 
+  def game_winner
+    if @player.bank == @diller.bank
+      puts('Ничья')
+      return
+    elsif @player.bank > @diller.bank
+      game_winner = @player
+    else
+      game_winner = @diller
+    end
+    puts("Игра окончена. Победил #{game_winner.name} $#{game_winner.bank}")
+  end
+
   private
 
   def player_step(player)
