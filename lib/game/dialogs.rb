@@ -27,7 +27,7 @@ class Game
   end
 
   def table_summary(results = :close)
-    puts("Банк #{@bank}".rjust(30, '#'))
+    puts(" Банк #{@bank}".rjust(20, '#'))
     @players.each { |p| results == :open ? open_summary(p) : summary(p) }
   end
 
