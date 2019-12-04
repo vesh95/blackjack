@@ -16,7 +16,7 @@ class Game
 
   def summary(player)
     puts("#{player.name} $#{player.bank}")
-    puts("#{player.score} #{player.shadow_cards}") # FIX: shadow_score
+    puts("#{player.shadow_score} #{player.shadow_cards}") # FIX: shadow_score
     puts('-' * 10)
   end
 
