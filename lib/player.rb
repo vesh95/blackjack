@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'hand'
-
+class NoMoneyError < RuntimeError; end
 class Player
   attr_reader :name, :bank
 
@@ -36,7 +36,7 @@ class Player
   end
 
   def give_money(value = 0)
-    return unless value <= @bank
+    raise NoMoneyError unless value <= @bank
 
     @bank -= value
     value
