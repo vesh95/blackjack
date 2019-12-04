@@ -15,6 +15,10 @@ class Player
     @hand << card
   end
 
+  def reset_hand
+    @hand = Hand.new
+  end
+
   def score
     @hand.score
   end
