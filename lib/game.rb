@@ -58,4 +58,15 @@ class Game
       @open = true
     end
   end
+
+  def three_cards?
+    @players.select { |p| p.cards_count == 3 }.size == 2
+    # example [Diller, Player].size == 2
+  end
+
+  def game_setup!
+    greeting!
+    @diller = Diller.new('Диллер')
+    @players = [@player, @diller]
+  end
 end
