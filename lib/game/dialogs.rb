@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Game
+  def next_round?
+    puts('Играть еще один раунд? (y/n)')
+    true if gets.chomp.to_s.downcase == 'y'
+  end
 
   private
 
