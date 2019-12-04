@@ -59,6 +59,30 @@ class Game
     end
   end
 
+  def choose_winner
+    if (@player.score > 21 && @diller.score > 21) || @player.score == @diller.score
+      standoff
+    elsif @player.score > 21
+      winner(@diller)
+    elsif @diller.score > 21 || @player.score > @diller.score
+      winner(@player)
+    else
+      winner(@diller)
+    end
+  end
+
+  def winner(player)
+    show_winner(player)
+    player.take_money(20)
+    @bank = 0
+  end
+
+  def standoff
+    @player.take_money(10)
+    @diller.take_money(10)
+    @bank = 0
+  end
+
   def three_cards?
     @players.select { |p| p.cards_count == 3 }.size == 2
     # example [Diller, Player].size == 2
