@@ -3,5 +3,7 @@ AllCops:
     - 'lib/*/*'
     - 'lib/**'
     - '*'
+  Exclude:
+    - 'README.md'
 Style/Documentation:
   Enabled: false
