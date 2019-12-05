@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Interface
+class Interface
   def next_round?
     print('Играть еще один раунд? (y/n) ')
     true if gets.chomp.to_s.downcase == 'y'
@@ -23,9 +23,9 @@ module Interface
     puts("#{player_resume(player)} #{player_cards(player, mode)}")
   end
 
-  def table_summary(results = :close)
+  def table_summary(players, results = :close)
     show_bank
-    @players.each { |p| results == :open ? summary(p, :open) : summary(p) }
+    players.each { |p| results == :open ? summary(p, :open) : summary(p) }
   end
 
   def actions_list(player)
@@ -52,9 +52,9 @@ module Interface
     "#{player.show_score(mode).to_s.rjust(2)} #{show_cards(player, mode)}"
   end
 
-  def resume
+  def resume(players)
     show_bank
-    @players.each { |player| puts("#{player.name} $#{player.bank}") }
+    players.each { |player| puts("#{player.name} $#{player.bank}") }
   end
 
   def show_bank

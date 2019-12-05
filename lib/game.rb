@@ -9,9 +9,8 @@ require_relative 'user'
 require_relative 'interface'
 
 class Game
-  include Interface
-
   def initialize
+    @interface = Interface.new
     @players = []
     @bank = 0
     reset_deck
@@ -20,16 +19,16 @@ class Game
 
   def start_round
     loop do
-      table_summary :close
+      @interface.table_summary(@players, :close)
       break if player_step(@player)
 
       break if player_step(@diller)
 
       break if three_cards? || @open
     end
-    table_summary :open
+    @interface.table_summary(@players, :open)
     choose_winner
-    resume
+    @interface.resume(@players)
   end
 
   def make_bets!
@@ -54,13 +53,17 @@ class Game
              else
                @diller
              end
-    show_game_winner(winner)
+    @interface.show_game_winner(winner)
+  end
+
+  def next_round?
+    @interface.next_round?
   end
 
   private
 
   def player_step(player)
-    case player.make_a_decision(select_decision(player))
+    case player.make_a_decision(@interface.select_decision(player))
     when :pass
       nil
     when :add
@@ -84,7 +87,7 @@ class Game
   end
 
   def winner(player)
-    show_winner(player)
+    @interface.show_winner(player)
     player.take_money(20)
     @bank = 0
   end
@@ -101,7 +104,7 @@ class Game
   end
 
   def game_setup!
-    nick = greeting!
+    nick = @interface.greeting!
     @player = User.new(nick)
     @diller = Diller.new('Диллер')
     @players = [@player, @diller]
