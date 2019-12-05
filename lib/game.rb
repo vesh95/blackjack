@@ -6,9 +6,11 @@ require_relative 'hand'
 require_relative 'diller'
 require_relative 'player'
 require_relative 'user'
-require_relative 'game/dialogs'
+require_relative 'interface'
 
 class Game
+  include Interface
+
   def initialize
     @players = []
     @bank = 0
@@ -18,7 +20,7 @@ class Game
 
   def start_round
     loop do
-      table_summary
+      table_summary :close
       break if player_step(@player)
 
       break if player_step(@diller)
@@ -45,22 +47,20 @@ class Game
   end
 
   def game_winner
-    if @player.bank == @diller.bank
-      puts('Ничья')
-      return
-    elsif @player.bank > @diller.bank
-      game_winner = @player
-    else
-      game_winner = @diller
-    end
-    puts("Игра окончена. Победил #{game_winner.name} $#{game_winner.bank}")
+    winner = if @player.bank == @diller.bank
+               nil
+             elsif @player.bank > @diller.bank
+               @player
+             else
+               @diller
+             end
+    show_game_winner(winner)
   end
 
   private
 
   def player_step(player)
-    actions_list(player) if player.class == User
-    case player.make_a_decision
+    case player.make_a_decision(select_decision(player))
     when :pass
       nil
     when :add
@@ -101,7 +101,8 @@ class Game
   end
 
   def game_setup!
-    greeting!
+    nick = greeting!
+    @player = User.new(nick)
     @diller = Diller.new('Диллер')
     @players = [@player, @diller]
   end
