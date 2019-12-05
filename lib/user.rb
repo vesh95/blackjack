@@ -3,10 +3,10 @@
 require_relative 'player'
 
 class User < Player
-  def make_a_decision
-    case gets.chomp.to_s
+  def make_a_decision(key)
+    case key
     when 'a'
-      raise 'У вас уже три карты' if cards_count == 3
+      return :pass if cards_count == 3
 
       :add
     when 'o'
@@ -14,8 +14,15 @@ class User < Player
     else
       :pass
     end
-  rescue RuntimeError => e
-    puts(e)
-    retry
+  end
+
+  private
+
+  def shadow_score
+    @hand.score
+  end
+
+  def shadow_cards
+    @hand.show
   end
 end

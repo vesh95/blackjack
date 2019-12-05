@@ -19,20 +19,22 @@ class Player
     @hand = Hand.new
   end
 
-  def score
-    @hand.score
+  def show_score(mode = :close)
+    case mode
+    when :close
+      shadow_score
+    when :open
+      score
+    end
   end
 
-  def shadow_cards
-    show_cards
-  end
-
-  def show_cards
-    @hand.show
-  end
-
-  def shadow_score
-    score
+  def show_cards(mode = :close)
+    case mode
+    when :close
+      shadow_cards
+    when :open
+      @hand.show
+    end
   end
 
   def give_money(value = 0)
@@ -48,5 +50,9 @@ class Player
 
   def cards_count
     @hand.cards.count
+  end
+
+  def score
+    @hand.score
   end
 end
