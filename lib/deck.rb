@@ -20,9 +20,8 @@ class Deck
 
   def set_generate
     set = []
-    %w[♣ ♥ ♠ ♦].each do |suit|
-      set.concat((2..10).map { |value| Card.new(suit, value) })
-      set.concat(%w[A J Q K].map { |value| Card.new(suit, value) })
+    Card::SUITS.each do |suit|
+      set.concat(Card::RANKS.map { |value| Card.new(suit, value) })
     end
     set
   end
