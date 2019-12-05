@@ -12,6 +12,6 @@ class Card
   end
 
   def show
-    "|#{suit} #{value}|"
+    [@suit, @value]
   end
 end

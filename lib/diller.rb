@@ -17,6 +17,8 @@ class Diller < Player
   end
 
   def shadow_cards
-    '|*  |' * @hand.cards.size
+    cards = []
+    @hand.cards.size.times { cards << ['*', ' '] }
+    cards
   end
 end

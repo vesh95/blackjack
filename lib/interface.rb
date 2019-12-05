@@ -49,7 +49,7 @@ module Interface
   end
 
   def player_cards(player, mode = :close)
-    "#{player.show_score(mode)} #{player.show_cards(mode)}"
+    "#{player.show_score(mode).to_s.rjust(2)} #{show_cards(player, mode)}"
   end
 
   def resume
@@ -59,5 +59,9 @@ module Interface
 
   def show_bank
     puts("Банк #{@bank}")
+  end
+
+  def show_cards(player, mode)
+    player.show_cards(mode).map { |card| "|#{card[0]} #{card[1]}|" }.join
   end
 end

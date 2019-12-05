@@ -19,7 +19,7 @@ class Hand
   end
 
   def show
-    @cards.map(&:show).join('')
+    @cards.map(&:show)
   end
 
   def score
